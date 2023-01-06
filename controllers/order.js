@@ -48,7 +48,7 @@ export const placeOrderOnline = catchAsyncError(async (req, res, next) => {
         totalAmount,
     } = req.body;
 
-    const user = '4edd40c86762e0fb12000003';
+    const user = req.user._id;
 
     const orderOptions = {
         shippingInfo,
@@ -58,7 +58,7 @@ export const placeOrderOnline = catchAsyncError(async (req, res, next) => {
         taxPrice,
         shippingCharges,
         totalAmount,
-        // user,
+        user,
     };
 
     const options = {
@@ -66,13 +66,19 @@ export const placeOrderOnline = catchAsyncError(async (req, res, next) => {
         currency: "INR"
     };
 
-    const order = await instance.orders.create(options);
+    try {
+        const order = await instance.orders.create(options);
+        res.status(201).json({
+            success: true,
+            order,
+            orderOptions
+        });
+    } catch (err) {
+        const { error } = err;
+        return next(new ErrorHandler(error.description, 404))
+    }
 
-    res.status(201).json({
-        success: true,
-        order,
-        orderOptions
-    });
+
 });
 
 export const paymentVerification = catchAsyncError(async (req, res, next) => {

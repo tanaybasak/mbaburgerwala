@@ -9,14 +9,8 @@ import userRoutes from './routes/user.js';
 import orderRoutes from './routes/order.js';
 import passport from 'passport';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
-
 const app = express();
 export default app;
-
-dotenv.config({
-    path: "./config/config.env"
-})
-
 
 
 //middleware
