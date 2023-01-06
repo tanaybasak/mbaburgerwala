@@ -2,7 +2,7 @@ import { catchAsyncError } from "../middleware/errorMiddleware.js";
 import { instance } from "../config/razorpay.js";
 import { Order } from "../models/Order.js";
 import { Payment } from "../models/Payment.js";
-import ErrorHandler from "../utils/ErrorHandler.js";
+import ErrorHandler from "../utils/errorHandler.js";
 import crypto from "crypto";
 
 export const placeOrder = catchAsyncError(async (req, res, next) => {
