@@ -1,11 +1,10 @@
 import { catchAsyncError } from "../middleware/errorMiddleware.js";
-import { instance } from "../server.js";
-
+import { instance } from "../config/razorpay.js";
 import { Order } from "../models/Order.js";
 import { Payment } from "../models/Payment.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import crypto from "crypto";
-import mongoose from "mongoose";
+
 export const placeOrder = catchAsyncError(async (req, res, next) => {
     const {
         shippingInfo,
