@@ -4,9 +4,6 @@ import cors from 'cors';
 import { connectPassport } from './utils/Provider.js'
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-// Importing Routes
-import userRoutes from './routes/user.js';
-import orderRoutes from './routes/order.js';
 import passport from 'passport';
 import { errorMiddleware } from './middleware/errorMiddleware.js';
 const app = express();
@@ -14,6 +11,9 @@ export default app;
 
 
 //middleware
+dotenv.config({
+    path: "./config/config.env",
+});
 
 app.use(cors({
     credentials: true,
@@ -44,6 +44,10 @@ app.use(passport.session());
 app.enable("trust proxy");
 connectPassport();
 
+
+// Importing Routes
+import userRoutes from './routes/user.js';
+import orderRoutes from './routes/order.js';
 
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', orderRoutes);

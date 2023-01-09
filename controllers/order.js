@@ -16,7 +16,7 @@ export const placeOrder = catchAsyncError(async (req, res, next) => {
         totalAmount,
     } = req.body;
 
-    const user = '4edd40c86762e0fb12000003';
+    const user = req.user_id;
 
     const orderOptions = {
         shippingInfo,
